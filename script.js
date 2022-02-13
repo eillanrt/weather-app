@@ -19,7 +19,7 @@ window.addEventListener("load", () => {
             lon = position.coords.longitude;
             lat = position.coords.latitude;
           
-            const base = "https://fcc-weather-api.glitch.me/api/current?" + `lat=${lat}&lon=${lon}`;
+            const base = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&` + `lon=${lon}&appid=6d055e39ee237af35ca066f35474e9df`;
 
             fetch(base)
                 .then((response) => response.json())
