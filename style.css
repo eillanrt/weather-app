@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+
+::selection {
+  background-color: #525252;
+}
+
+header {
+  text-align: center;
+  color: white;
+}
+
+body {
+  margin: 0;
+  text-align: center;
+  background-color: currentColor;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.wrapper {
+  min-width: 400px;
+  max-width: 400px;
+  margin: 40px 0 120px;
+}
+
+.container {
+  color: white;
+  margin-top: -20px;
+  font-size: 1.7rem;
+}
+
+.container div {
+  margin-bottom: 12px;
+}
+
+.summary {
+  text-transform: capitalize;
+}
+
+footer ul {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+}
+
+footer li {
+  display: inline;
+  list-style-type: none;
+  margin-bottom: 8px;
+}
+
+footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5% 0;
+}
+
+footer,
+footer a {
+  color: white;
+  font-size: 16px;
+}
+
+@media (max-width: 1040px) {
+  footer {
+    flex-direction: column;
+    justify-content: center;
+  }
+  footer ul {
+    width: 100%;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .wrapper {
+    max-width: 90%;
+    min-width: 90%;
+  }
+  footer {
+    padding: 0;
+  }
+  footer ul {
+    flex-direction: column;
+    padding: 0;
+  }
+}
