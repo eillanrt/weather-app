@@ -24,7 +24,7 @@ window.addEventListener("load", () => {
             fetch(base)
                 .then((response) => response.json())
                 .then((data) => {
-                    temperature.textContent = Math.floor(data.main.temp) + "°C";
+                    temperature.textContent = Math.floor(data.main.temp - 273) + "°C";
                     summary.textContent = data.weather[0].description;
                     loc.textContent = `${data.name}, ${data.sys.country}`;
 
