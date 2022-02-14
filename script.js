@@ -10,7 +10,7 @@ window.addEventListener("load", () => {
         navigator.permissions.query({ name: "geolocation" }).then((result) => {
             if (result.state === "granted") loc.innerText = "Fetching...";
             else if (result.state === "prompt") loc.innerText = "We need access to your location to show the weather in your area.";
-            else if (result.state === "denied") loc.innerText = "Permission for location is denied.";
+            else if (result.state === "denied") loc.innerText = "Permission for location has been denied.";
         });
     }
 
