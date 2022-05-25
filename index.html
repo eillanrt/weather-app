@@ -1,45 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Weather app written in JavaScript" />
+        <title>Weather app</title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <link rel="stylesheet" type="text/css" href="icons.css" />
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png" />
+        <link rel="manifest" href="assets/favicon/site.webmanifest" />
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Weather app written in JavaScript">
-    <title>Weather app</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <link rel="stylesheet" type="text/css" href="icons.css" />
-    <link rel="icon" type="image/png" href="favicon.png" />
-</head>
+    <body>
+        <header>
+            <h1>Eillan weather app</h1>
+            <p>Weather app using JavaScript</p>
+        </header>
+        <div class="wrapper">
+            <div class="icon-div"></div>
 
-<body>
-    <header>
-        <h1>Eillan weather app</h1>
-        <p>Weather app using JavaScript</p>
-    </header>
-    <div class="wrapper">
-        <div class="icon-div"></div>
-
-        <div class="container">
-            <div class="temp">-°C</div>
-            <div class="summary">----</div>
-            <div class="location">
-                <p>Fetching...</p>
-                <noscript>
-                    JavaScript is disabled. JavaScript is needed to access your location.
-                </noscript>
+            <div class="container">
+                <div class="temp">-°C</div>
+                <div class="summary">----</div>
+                <div class="location">
+                    <p>Fetching...</p>
+                    <noscript>
+                        JavaScript is disabled. JavaScript is needed to access your location.
+                    </noscript>
+                </div>
             </div>
         </div>
-    </div>
 
-    <footer>
-        <ul>
-            <li>Icons from: <a href="https://codepen.io/joshbader/full/EjXgqr">Josh Bader</a></li>
-            <li>View Code: <a href="https://github.com/eillanrt/weather-app"> Here</a></li>
-        </ul>
-        <p>&copy; 2022 Allan Robert Tan</p>
-    </footer>
-    <script src="script.js"></script>
-</body>
-
+        <footer>
+            <ul>
+                <li>Icons from: <a href="https://codepen.io/joshbader/full/EjXgqr">Josh Bader</a></li>
+                <li>View Code: <a href="https://github.com/eillanrt/weather-app"> Here</a></li>
+            </ul>
+            <p>&copy; 2022 Allan Robert Tan</p>
+        </footer>
+        <script src="script.js"></script>
+    </body>
 </html>
