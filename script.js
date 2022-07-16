@@ -1,62 +1,68 @@
-const temperature = document.querySelector(".temp");
-const summary = document.querySelector(".summary");
-const loc = document.querySelector(".location");
-const icondiv = document.querySelector(".icon-div");
-
-const getWeather = function (latitude, longitude) {
-    const base = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&` + `lon=${longitude}&appid=6d055e39ee237af35ca066f35474e9df`;
-
-    fetch(base)
-        .then((response) => response.json())
-        .then((data) => {
-            temperature.textContent = Math.floor(data.main.temp - 273) + "°C";
-            summary.textContent = data.weather[0].description;
-            loc.textContent = `${data.name}, ${data.sys.country}`;
-
-            switch (data.weather[0].main) {
+window.addEventListener("DOMContentLoaded", async () => {
+    const app = {
+        HTMLElements: {
+            temperature: document.querySelector(".temp"),
+            summary: document.querySelector(".summary"),
+            location: document.querySelector(".location"),
+            icon: document.querySelector(".icon-div"),
+        },
+        displayUI(temperature, summary, location) {
+            this.HTMLElements.temperature.innerText = temperature;
+            this.HTMLElements.summary.innerText = summary;
+            this.HTMLElements.location.innerText = location;
+        },
+        displayIcon(type) {
+            const { icon } = this.HTMLElements;
+            switch (type) {
                 case "Thunderstorm":
-                    icondiv.innerHTML = '<div class="icon thunder-storm"><div class="cloud"></div><div class="lightning"><div class="bolt"></div><div class="bolt"></div></div></div>';
+                    icon.innerHTML = '<div class="icon thunder-storm"><div class="cloud"></div><div class="lightning"><div class="bolt"></div><div class="bolt"></div></div></div>';
                     break;
                 case "Drizzle":
-                    icondiv.innerHTML = '<div class="icon sun-shower"><div class="cloud"></div><div class="sun"><div class="rays"></div></div><div class="rain"></div></div>';
+                    icon.innerHTML = '<div class="icon sun-shower"><div class="cloud"></div><div class="sun"><div class="rays"></div></div><div class="rain"></div></div>';
                     break;
                 case "Rain":
-                    icondiv.innerHTML = '<div class="icon rainy"><div class="cloud"></div><div class="rain"></div></div>';
+                    icon.innerHTML = '<div class="icon rainy"><div class="cloud"></div><div class="rain"></div></div>';
                     break;
                 case "Snow":
-                    icondiv.innerHTML = '<div class="icon flurries"><div class="cloud"></div><div class="snow"><div class="flake"></div><div class="flake"></div></div></div>';
+                    icon.innerHTML = '<div class="icon flurries"><div class="cloud"></div><div class="snow"><div class="flake"></div><div class="flake"></div></div></div>';
                     break;
                 case "Atmosphere":
-                    icondiv.innerHTML = '<div class="icon sunny"><div class="sun"><div class="rays"></div></div></div>';
+                    icon.innerHTML = '<div class="icon sunny"><div class="sun"><div class="rays"></div></div></div>';
                     break;
                 case "Clear":
-                    icondiv.innerHTML = '<div class="icon sunny"><div class="sun"><div class="rays"></div></div></div>';
+                    icon.innerHTML = '<div class="icon sunny"><div class="sun"><div class="rays"></div></div></div>';
                     break;
                 case "Clouds":
-                    icondiv.innerHTML = '<div class="icon cloudy"><div class="cloud"></div><div class="cloud"></div></div>';
+                    icon.innerHTML = '<div class="icon cloudy"><div class="cloud"></div><div class="cloud"></div></div>';
                     break;
                 default:
-                    icondiv.innerHTML = "<div>Something went wrong</div>";
+                    icon.innerHTML = "<div>Something went wrong</div>";
             }
-        });
-};
+        },
+        async fetchWeather(latitude, longitude) {
+            const base = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&` + `lon=${longitude}&appid=6d055e39ee237af35ca066f35474e9df`;
 
-window.addEventListener("load", () => {
+            const response = await fetch(base);
+            const data = await response.json();
+
+            this.displayUI(Math.floor(data.main.temp - 273) + "°C", data.weather[0].description, `${data.name}, ${data.sys.country}`);
+            this.displayIcon(data.weather[0].main);
+        },
+    };
+    
     if ("permissions" in navigator) {
-        navigator.permissions.query({ name: "geolocation" }).then((result) => {
-            if (result.state === "granted") loc.innerText = "Fetching...";
-            else if (result.state === "prompt") loc.innerText = "We need access to your location to show the weather in your area.";
-            else if (result.state === "denied") loc.innerText = "Permission for location has been denied.";
-        });
+        const result = await navigator.permissions.query({ name: "geolocation" });
+        if (result.state === "prompt") app.HTMLElements.location.innerText = "We need access to your location to show the weather in your area.";
+        else if (result.state === "denied") app.HTMLElements.location.innerText = "Permission for location has been denied.";
     }
 
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition((position) => {
             const { latitude, longitude } = position.coords;
 
-            getWeather(latitude, longitude);
+            app.fetchWeather(latitude, longitude);
         });
     } else {
-        loc.innerText = "Geolocation seems unavailable";
+        app.HTMLElements.location.innerText = "Geolocation seems unavailable";
     }
 });
